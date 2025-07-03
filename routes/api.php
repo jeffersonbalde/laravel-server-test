@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\AuthenticationController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,17 @@ Route::group(["middleware" => ["auth:sanctum"]], function() {
 
     Route::post("temp-images", [TempImageController::class, "store"]);
 
+});
+
+Route::get('/users', function () {
+    return User::all();
+});
+
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return "DB connection successs!";
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
 });
