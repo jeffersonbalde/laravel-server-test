@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\AuthenticationController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::post("authenticate", [AuthenticationController::class, "authenticate"]);
