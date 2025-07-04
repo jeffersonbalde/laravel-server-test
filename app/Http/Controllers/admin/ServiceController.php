@@ -44,6 +44,7 @@ class ServiceController extends Controller
         $validator = Validator::make($request->all(), [
             "title" => "required",
             "slug" => "required|unique:services,slug",
+            "status" => "required|in:0,1",
         ]);
 
         if($validator->fails()) {
@@ -58,7 +59,7 @@ class ServiceController extends Controller
         $model->short_description = $request->short_description;
         $model->slug = Str::slug($request->slug);
         $model->content = $request->content;
-        $model->status = $request->status;
+        $model->status = (int) $request->status;
         $model->save();
 
         if($request->imageId > 0) { 
@@ -142,7 +143,7 @@ class ServiceController extends Controller
 
         $validator = Validator::make($request->all(), [
             "title" => "required",
-            "slug" => "required|unique:services,slug,'.$id.',id",
+            "slug" => "required|unique:services,slug," . $id,
         ]);
 
         if($validator->fails()) {
