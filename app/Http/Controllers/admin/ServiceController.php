@@ -62,34 +62,34 @@ class ServiceController extends Controller
         $model->status = (int) $request->status;
         $model->save();
 
-        if($request->imageId > 0) { 
-            $tempImage = TempImage::find($request->imageId);
+        // if($request->imageId > 0) { 
+        //     $tempImage = TempImage::find($request->imageId);
 
-            if($tempImage != null) {
-                $extArray = explode(".",$tempImage->name);
-                $ext = last($extArray);
+        //     if($tempImage != null) {
+        //         $extArray = explode(".",$tempImage->name);
+        //         $ext = last($extArray);
 
-                $fileName = strtotime("now").$model->id.'.'.$ext;
+        //         $fileName = strtotime("now").$model->id.'.'.$ext;
 
-                // small service picture
-                $sourcePath = public_path("uploads/temp/".$tempImage->name);
-                $destinationPath = public_path("uploads/services/small/".$fileName);
-                $manager = new ImageManager(Driver::class);
-                $image = $manager->read($sourcePath);
-                $image->coverDown(500, 600);
-                $image->save($destinationPath);
+        //         // small service picture
+        //         $sourcePath = public_path("uploads/temp/".$tempImage->name);
+        //         $destinationPath = public_path("uploads/services/small/".$fileName);
+        //         $manager = new ImageManager(Driver::class);
+        //         $image = $manager->read($sourcePath);
+        //         $image->coverDown(500, 600);
+        //         $image->save($destinationPath);
 
-                // large service picture
-                $destinationPath = public_path("uploads/services/large/".$fileName);
-                $manager = new ImageManager(Driver::class);
-                $image = $manager->read($sourcePath);
-                $image->scaleDown(1200);
-                $image->save($destinationPath);
+        //         // large service picture
+        //         $destinationPath = public_path("uploads/services/large/".$fileName);
+        //         $manager = new ImageManager(Driver::class);
+        //         $image = $manager->read($sourcePath);
+        //         $image->scaleDown(1200);
+        //         $image->save($destinationPath);
 
-                $model->image = $fileName;
-                $model->save();
-            }
-        }
+        //         $model->image = $fileName;
+        //         $model->save();
+        //     }
+        // }
 
         return response()->json([
             "status" => true,
@@ -160,40 +160,40 @@ class ServiceController extends Controller
         $service->status = $request->status;
         $service->save();
 
-        if($request->imageId > 0) { 
-            $oldImage = $service->image;
-            $tempImage = TempImage::find($request->imageId);
+        // if($request->imageId > 0) { 
+        //     $oldImage = $service->image;
+        //     $tempImage = TempImage::find($request->imageId);
 
-            if($tempImage != null) {
-                $extArray = explode(".",$tempImage->name);
-                $ext = last($extArray);
+        //     if($tempImage != null) {
+        //         $extArray = explode(".",$tempImage->name);
+        //         $ext = last($extArray);
 
-                $fileName = strtotime("now").$service->id.'.'.$ext;
+        //         $fileName = strtotime("now").$service->id.'.'.$ext;
 
-                // small service picture
-                $sourcePath = public_path("uploads/temp/".$tempImage->name);
-                $destinationPath = public_path("uploads/services/small/".$fileName);
-                $manager = new ImageManager(Driver::class);
-                $image = $manager->read($sourcePath);
-                $image->coverDown(500, 600);
-                $image->save($destinationPath);
+        //         // small service picture
+        //         $sourcePath = public_path("uploads/temp/".$tempImage->name);
+        //         $destinationPath = public_path("uploads/services/small/".$fileName);
+        //         $manager = new ImageManager(Driver::class);
+        //         $image = $manager->read($sourcePath);
+        //         $image->coverDown(500, 600);
+        //         $image->save($destinationPath);
 
-                // large service picture
-                $destinationPath = public_path("uploads/services/large/".$fileName);
-                $manager = new ImageManager(Driver::class);
-                $image = $manager->read($sourcePath);
-                $image->scaleDown(1200);
-                $image->save($destinationPath);
+        //         // large service picture
+        //         $destinationPath = public_path("uploads/services/large/".$fileName);
+        //         $manager = new ImageManager(Driver::class);
+        //         $image = $manager->read($sourcePath);
+        //         $image->scaleDown(1200);
+        //         $image->save($destinationPath);
 
-                $service->image = $fileName;
-                $service->save();
+        //         $service->image = $fileName;
+        //         $service->save();
 
-                if($oldImage != "") {
-                    File::delete(public_path("uploads/services/large/".$oldImage));
-                    File::delete(public_path("uploads/services/small/".$oldImage));
-                }
-            }
-        }
+        //         if($oldImage != "") {
+        //             File::delete(public_path("uploads/services/large/".$oldImage));
+        //             File::delete(public_path("uploads/services/small/".$oldImage));
+        //         }
+        //     }
+        // }
 
         return response()->json([
             "status" => true,
