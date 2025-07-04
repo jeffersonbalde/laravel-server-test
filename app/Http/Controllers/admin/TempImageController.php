@@ -37,12 +37,12 @@ class TempImageController extends Controller
 
             $image->move(public_path("uploads/temp"), $imageName);
             
-            $sourcePath = public_path("uploads/temp/".$imageName);
-            $destinationPath = public_path("uploads/temp/thumb/".$imageName);
-            $manager = new ImageManager(Driver::class);
-            $image = $manager->read($sourcePath);
-            $image->coverDown(300, 300);
-            $image->save($destinationPath);
+            // $sourcePath = public_path("uploads/temp/".$imageName);
+            // $destinationPath = public_path("uploads/temp/thumb/".$imageName);
+            // $manager = new ImageManager(Driver::class);
+            // $image = $manager->read($sourcePath);
+            // $image->coverDown(300, 300);
+            // $image->save($destinationPath);
 
             return response()->json([
                 "status" => true,
